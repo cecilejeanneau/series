@@ -12,14 +12,18 @@ class MainController extends AbstractController
     #[Route('/')]
     public function home(): Response
     {
-//        return  new Response("<h1>Hello world ! </h1>");
-        return $this->render('main/home.html.twig');
+        $username = "<h2>LiliKorNet</h2>";
+        $serie = ["name" => "Emily in Paris", "year" => 2020];
+
+        return $this->render('main/home.html.twig', [
+            'name' => $username,
+            'serie' => $serie
+        ]);
     }
 
     #[Route('/test', name: 'main_test')]
     public function test(): Response
     {
-//        return  new Response("<h1>Test ! </h1>");
         return $this->render('main/test.html.twig');
     }
 }
