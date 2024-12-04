@@ -4,7 +4,11 @@ body {
     background-position: center center;
     background-size: cover;
     color: #EEE;
-    font-family: 'Roboto', serif;
+    /*font-family: 'Roboto', serif;*/
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
 }
 
 .flex_div{
@@ -46,6 +50,11 @@ img {
 
 h1, h2, h3, h4 {
     margin-top: 0;
+    /*.bokor-regular {*/
+        font-family: "Bokor", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    /*}*/
 }
 
 body > .container {
@@ -58,9 +67,25 @@ header img {
     height: 70px;
 }
 
-main {
-    flex: 1;
+/*main {*/
+/*    flex: 1;*/
+/*}*/
+.container {
+    /*max-width: 1200px;*/
+    /*margin: auto;*/
+    /*padding: 5px;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*height: 100vh;*/
+    display: flex;
+    flex-direction: column; /* Aligne les éléments verticalement (titre en haut, puis le formulaire) */
+    align-items: center; /* Centre horizontalement tous les éléments enfants (titre et formulaire) */
+    justify-content: flex-start; /* Aligne les éléments vers le haut */
+    height: 100vh; /* Pour que la hauteur prenne toute la page */
+    padding: 20px
 }
+
 
 nav ul {
     display: flex;
@@ -103,8 +128,15 @@ nav li {
 
 /*********************** Module 6 Form ******************************/
 
+form {
+    width: 100%;
+    max-width: 50rem;
+    margin: auto;
+}
+
 label {
     display: block;
+    margin-bottom: 0.5rem;
 }
 
 input,
@@ -113,6 +145,7 @@ select {
     box-sizing: border-box;
     width: 200px;
     max-width: 50%;
+    border-radius: 8rem;
 }
 
 textarea{
@@ -120,6 +153,7 @@ textarea{
     box-sizing: border-box;
     width: 400px;
     height: 100px;
+    border-radius: 8rem;
 }
 
 /*************************** Module 6 Flash *******************************/
@@ -134,7 +168,7 @@ textarea{
 }
 
 .flash-success {
-    background-color: lawngreen
+    background-color: lightgreen;
 }
 
 .flash-error {
@@ -156,4 +190,9 @@ textarea{
 
 .seasons{
     margin-top: 15px;
+}
+
+
+.error {
+    color: indianred;
 }

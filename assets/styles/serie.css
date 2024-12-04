@@ -1,0 +1,6 @@
+.special-style {
+    /*background-color: #ff6347; !* Couleur spéciale *!*/
+    /*color: white;*/
+    /*font-weight: bold;*/
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)),  url('{{ asset('img/backdrops/' ~ serie.backdrop) }}');
+}

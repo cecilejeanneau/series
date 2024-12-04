@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lis of TV Show</h1>
+
+    <section class="series-list">
+        {%  for serie in series %}
+            {#        <div>{{ serie.name }}</div>#}
+            <article class="serie-card" title="{{ serie.name }} | {{ serie.seasons | length }} seasons">
+                <a href="{{ path('series_details', {'id': serie.id}) }}">
+                    <img src="{{ asset('img/posters/series/' ~ serie.poster) }}" alt="{{ serie.name }}">
+                </a>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | List
+{% endblock %}
+

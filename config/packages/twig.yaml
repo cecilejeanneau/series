@@ -1,5 +1,6 @@
 twig:
     file_name_pattern: '*.twig'
+#    form_themes : for all form in the app
 
 when@test:
     twig:
