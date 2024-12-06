@@ -12,13 +12,17 @@
             <p>{{ serie.genres }}</p>
             <p>{{ serie.overview }}</p>
             <p>Users rating : {{ serie.vote }}</p>
-            <p>Serie status : {{ serie.status }}</p>
+            <p>Serie status : {{ serie.status }} / Like <span id="serie-nblike">{{  serie.nbLike }}</span></p>
             <p>Aired from {{ serie.firstAirDate | date('Y-m-d') }} to {{ serie.lastAirDate | date('Y-m-d') }}</p>
             <p>{{ serie.overview | nl2br }}</p>
             {% if app.user %}
                 <div>
                     <a href="{{ path('season_add', {'serieId': serie.id}) }}"><button>Add a season !</button></a>
                     <a href="{{ path('series_delete', {'id': serie.id}) }}"><button>Delete a season !</button></a>
+                    <button class="btn-like" value="1">Like &#x1F44D;
+                        !</button>
+                    <button class="btn-like" value="-1">Dislike &#x1F44E;
+                        !</button>
                 </div>
             {% endif %}
         </article>
@@ -59,5 +63,35 @@
             url("{{ asset('img/backdrops/' ~ serie.backdrop) }}");
         }
     </style>
+{% endblock %}
+
+{% block extraJS %}
+    <script>
+        let buttons = Array.from(document.querySelectorAll('.btn-like'));
+        let url = "{{ path('api_series_update', {'id': serie.id}) }}"
+
+        let nblike = parseInt({{ serie.nbLike }})
+
+        buttons.forEach(function(val) {
+            // console.log(val);
+
+            val.addEventListener('click', function () {
+                console.log(this);
+                let data = { nbLike: nblike + parseInt(val.value)}
+                console.log(data);
+                fetch(url, {method: 'PUT', body: JSON.stringify(data)})
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        document.getElementById('serie-nblike').innerText = data.nbLike
+                        nblike = parseInt(data.nbLike)
+                    }
+                )
+            })
+
+            console.log(url);
+        })
+
+    </script>
 {% endblock %}
 

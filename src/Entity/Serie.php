@@ -2,6 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\SerieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,6 +21,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity(fields: ['name'])]
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
+#[ApiResource(operations:
+    [
+        new Get(),
+        new GetCollection(),
+        new Post(),
+        new Patch(),
+        new Put(),
+        new Delete()
+    ],
+    normalizationContext: ['groups' => ['series-api']],
+)]
 class Serie
 {
     #[ORM\Id]
@@ -82,6 +100,10 @@ class Serie
         ])]
     #[Groups('serie-api')]
     private Collection $seasons;
+
+    #[ORM\Column]
+    #[Groups('serie-api')]
+    private ?int $nbLike = null;
 
     public function __construct()
     {
@@ -280,6 +302,18 @@ class Serie
                 $season->setSerie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNbLike(): ?int
+    {
+        return $this->nbLike;
+    }
+
+    public function setNbLike(int $nbLike): static
+    {
+        $this->nbLike = $nbLike;
 
         return $this;
     }
